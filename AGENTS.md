@@ -1,0 +1,21 @@
+<!-- LOVABLE:BEGIN -->
+> [!IMPORTANT]
+> This project is connected to [Lovable](https://lovable.dev). Avoid rewriting
+> published git history — force pushing, or rebasing/amending/squashing commits
+> that are already pushed — as it rewrites history on Lovable's side and the
+> user will likely lose their project history.
+>
+> Commits you push to the connected branch sync back to Lovable and show up in
+> the editor, so keep the branch in a working state.
+<!-- LOVABLE:END -->
+
+## Project architecture
+
+- Host externally sourced event videos and supplied image media through Lovable Assets so the site has no embedded third-party player dependencies.
+- Store speaker names and roles as structured content and render them as page text, keeping portrait assets free of baked-in labels for consistent quality and accessibility.
+- Use SiteChrome for shared navigation and footer across event pages; major content destinations use distinct TanStack routes so active navigation and page metadata stay meaningful.
+- Keep event countdown arithmetic in the browser-safe thrive-countdown utility with explicit UTC boundaries and tests; render clock values only after hydration to avoid mismatches.
+- Keep current event dates, hours and registration destination in EVENT; shared presentation and countdown code consume that source to prevent inconsistent updates.
+- Preserve the existing interactive venue embed on the dedicated travel page; defer hosted montage loading until near the viewport and use native accessible media controls.
+- Keep 2025 resources in a dedicated route with structured media collections, uncropped optimized images, and same-origin downloadable asset links; restricted external videos must show their real availability, never a simulated player or download.
+- Execute supplied Systeme.io form scripts in isolated route-local srcDoc frames with source-checked height messages; unmounting destroys provider globals and listeners without duplicate execution.
